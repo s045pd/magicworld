@@ -1,0 +1,41 @@
+<html ng-app="ionicApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>{{ data['title'] }}</title>
+    <link href="https://cdn.bootcss.com/ionic/1.3.2/css/ionic.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <style>
+      body {
+          cursor: url('http://www.runoob.com/static/img/finger.png'), auto;
+      }
+    </style>
+</head>
+<body class="black">
+
+    <div class="bar bar-header bar-light">
+      <h1 class="title"></h1>
+    </div>
+
+    <div class="content has-header ionic-pseudo">
+
+      {% for item in data['datas'] %}
+      <div class="list card">
+
+        <div class="item item-image">
+          <img src="{{item['img_url']}}">
+        </div>
+
+        <div class="item item-text-wrap">
+            {{item['title']}}
+        </div>
+
+      </div>
+      {% end %}
+    </div>
+
+
+    <script src="https://cdn.bootcss.com/ionic/1.3.2/js/ionic.bundle.min.js"></script>
+    </body>
+</html>
