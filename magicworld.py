@@ -14,8 +14,9 @@ Dely = 1 * 24 * 3600
 class bot(object):
     """docstring for bot"""
 
-    def __init__(self):
+    def __init__(self, savepic=False):
         super(bot, self).__init__()
+        self.savepic = savepic
         self.crawler = Anticrawler()
         self.session = self.crawler.session
         self.logger = logging.getLogger(type(self).__name__)
@@ -96,14 +97,14 @@ class bot(object):
             self.logger.info('JSON Data Saved')
 
     def SavePic(self, path, res):
-        if platform.system() is not "Lunix":
+        if platform.system() is not "Lunix" and self.savepic:
             for target in res:
                 picpath = ABpath(f"{path}/{target['img_url'].split('/')[-1]}")
                 if not os.path.exists(picpath):
                     resp = self.session.get(target["img_url"])
                     if self.resp_check(resp):
                         with open(picpath, "wb") as pic:
-                            pic.write(resppic.content)
+                            pic.write(resp.content)
 
 
 def main():
@@ -112,4 +113,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    MainStart(main, None, Dely)

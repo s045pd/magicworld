@@ -4,6 +4,8 @@ import tornado.netutil
 import tornado.httpserver
 import tornado.escape
 import os
+import threading
+from magicworld import *
 
 SERVER_PORT = 80
 STATIC_PATH = os.path.join(os.path.dirname(__file__), 'img')
@@ -44,7 +46,13 @@ def make_app():
     ], **settings)
 
 
+def run_bot():
+    spider = bot()
+    spider.start()
+
 if __name__ == '__main__':
+    SPY = threading.Thread(target=MainStart, args=(run_bot, None, Dely))
+    SPY.start()
     sockets = tornado.netutil.bind_sockets(SERVER_PORT)
     app = tornado.httpserver.HTTPServer(make_app())
     app.add_sockets(sockets)
