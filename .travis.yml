@@ -4,9 +4,8 @@ python:
   - "3.6"
 
 # command to install dependencies
-install:
-  - pip install .
-  - pip install requests tornado pyquery
+install:  
+  - pip install requests tornado pyquery pytest
 
 # command to run tests
 script:
