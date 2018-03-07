@@ -5,10 +5,8 @@ python:
 
 # command to install dependencies
 install:
-  - pip install requests
-  - pip install tornado
-  - pip install pyquery
+  - pip install requests tornado pyquery
 
 # command to run tests
 script:
-  - server
+  - pytest
