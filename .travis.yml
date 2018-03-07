@@ -1,0 +1,14 @@
+language: python
+
+python:
+  - "3.6"
+
+# command to install dependencies
+install:
+  - pip install requests
+  - pip install tornado
+  - pip install pyquery
+
+# command to run tests
+script:
+  - main
