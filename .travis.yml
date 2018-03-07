@@ -5,6 +5,7 @@ python:
 
 # command to install dependencies
 install:
+  - pip install .
   - pip install requests tornado pyquery
 
 # command to run tests
