@@ -3,6 +3,6 @@
   python:
     - "3.6"
   install:  
-    - pip install requests tornado pyquery pytest
-  script: trial magicworld
+    - pip install requests tornado pyquery pytest pytest-cov
+  script: pytest
 
