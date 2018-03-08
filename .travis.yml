@@ -4,5 +4,5 @@
     - "3.6"
   install:  
     - pip install requests tornado pyquery pytest pytest-cov
-  script: pytest
+  script: python -m pytest server.py
 
