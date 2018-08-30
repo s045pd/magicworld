@@ -10,7 +10,6 @@ TargetUrl_path = '/photo/'
 Local_path = "./img"
 Dely = 1 * 24 * 3600
 
-
 class bot(object):
     """docstring for bot"""
 
