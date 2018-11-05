@@ -25,6 +25,9 @@ WechatConf = {
     "Apps": {
         "1000002": {
             "Secret": "s408pwLxJqxtB5mJREe8mm8bJLx11XtPjDmvFX0npNk"
+        },
+        "1000003":{
+            "Secret": "6P2W-xfTQuki_jlikqRSO67oCjpfiEA6HYbSsiBehl8"
         }
     }
 }

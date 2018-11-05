@@ -12,7 +12,7 @@ from CompanyWeChat import WechatReports
 from ipip3 import IPX
 from magicworld import *
 
-IPIP_NET_DATA_PATH = "IPLocation/ipip.datx"
+IPIP_NET_DATA_PATH = "ipip.datx"
 IPIP_NET_DATA_COLLIST = ["nation", "province", "city", "organization", "isp", "latitude", "longitude", "area", "timezone",
                          "areacode", "citycode1", "citycode2", "unkown"]
 
@@ -33,19 +33,21 @@ def location(IP):
     return {}
 
 
-def sendUserIP(request):
+def sendUserIP(request,locationData=None):
     targetIP = request.remote_ip
     userAgent = request.headers['user-agent']
     L = location(targetIP)
+    if locationData:
+        L['latitude'],L['longitude'] = locationData.split(",")
+    # https: // www.google.com/maps/search/41.40338, 2.17403/@41.403384, 2.1718413, 17z
     # WECHATBOT.Data_send(MsgType="text", Content=TMPHTML.format(targetIP,userAgent), SendNow=True)
-    WECHATBOT.Data_send(MsgType="textcard", Content={
-                        "title": f"IP: {targetIP}", "description": f"""<div class="gray">{moment.now()}</div><div class="gray">User-Agent : {userAgent}</div><br/><br/><div class="gray">Address : {L.get('nation','')} {L.get('province','')} {L.get('city','')}</div><div class="gray">Location: {L.get('latitude','')},{L.get('longitude','')} </div>""", "url": "about blank"}, SendNow=True)
+    WECHATBOT.Data_send(MsgType="textcard", AppId="1000003", Content={
+                        "title": f"IP: [{'GEO'if locationData else 'IP'}]{targetIP}", "description": f"""<div class="gray">{moment.now()}</div><div class="gray">User-Agent : {userAgent}</div><br/><br/><div class="gray">Address : {L.get('nation','')} {L.get('province','')} {L.get('city','')}</div><div class="gray">Location: {L.get('latitude','')},{L.get('longitude','')} </div>""", "url": f"https://www.google.com/maps/search/{L.get('latitude','')}, {L.get('longitude','')}"}, SendNow=True)
 
 
 class Item(tornado.web.RequestHandler):
 
     def get(self, doc_id):
-        sendUserIP(self.request)
         datapath = f"{STATIC_PATH}/{doc_id}/data.json"
         if os.path.exists(datapath):
             try:
@@ -65,6 +67,11 @@ class Main(tornado.web.RequestHandler):
         idlist = list(os.walk("./img"))[0][1]
         if idlist:
             self.redirect(f"/{max(idlist)}")
+
+    
+    def post(self):
+        location = tornado.escape.json_decode(self.request.body).get('location')
+        sendUserIP(self.request,location)
 
 
 def make_app():
