@@ -3,6 +3,8 @@ from pyquery import PyQuery as jq
 import os
 import json
 import platform
+from conf import config
+from task import telegram_withpic
 
 ROBOTS_FILE = "http://tech.huanqiu.com/robots.txt"
 TargetUrl = "http://tech.huanqiu.com/photo/"
@@ -49,6 +51,8 @@ class bot(object):
             self.logger.info("Path not exists")
             os.mkdir(path)
             self.logger.info("Path init success")
+        else:
+            return True
 
     def pkgtaskitem(self, data):
         keys = ["title", "href", "id"]
@@ -90,7 +94,9 @@ class bot(object):
                 self.SavePic(path, res)
 
     def SaveJSON(self, path, item):
-        self.pathinit(path)
+        if self.pathinit(path):
+            telegram_withpic(item['datas'][0]['img_url'],
+                             f'{config.domain}{item["id"]}')
         with open(ABpath(f"{path}/data.json"), "w") as f:
             f.write(json.dumps(item, indent=4))
             self.logger.info('JSON Data Saved')
