@@ -1,0 +1,7 @@
+termcolor==1.1.0
+pyquery==1.4.0
+telepot==12.7
+Jinja2==2.10
+sanic==18.12.0
+moment==0.8.2
+requests==2.21.0
