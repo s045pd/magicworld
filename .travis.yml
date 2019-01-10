@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 language: python
 
 python:
@@ -12,3 +13,13 @@ install:
 # command to run tests
 script:
   - main
+=======
+
+  language: python
+  python:
+    - "3.6"
+  install:  
+    - pip install requests tornado pyquery pytest pytest-cov
+  script: python -m pytest server.py
+
+>>>>>>> 6d516a42f1ab9a65cad3a053021ee92fe63aebc5
