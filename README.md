@@ -1,6 +1,10 @@
-### 爬一爬，《环球网 - 神奇世界看看看》！
+###《环球网 - 神奇世界看看看》！
 
 ![输入图片说明](https://static.oschina.net/uploads/img/201802/04133958_6hAY.jpg "在这里输入图片标题")
+
+### Telegram推送效果
+
+![](tg.png)
 
 ### 模块准备
 这里推荐使用[Anaconda](https://www.anaconda.com/download/)集成环境，自带各类常用第三方模块，更高效率开发。
